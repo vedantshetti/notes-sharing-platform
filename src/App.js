@@ -6,9 +6,14 @@ import SecondYear from './components/secondyear/SecondYear';
 import ThirdYear from './components/thirdyear/ThirdYear';
 import FourthYear from './components/fourthyear/FourthYear';
 import FirstYear from './components/firstyear/FirstYear';
-import DepartmentNotes from './components/thirdyear/DepartmentSubject';
+
 import DepartmentSubject from './components/thirdyear/DepartmentSubject';
 import SubjectNotes from './components/thirdyear/SubjectNotes';
+
+import AddNoteFile from './components/AddNoteFile/AddNoteFile';
+
+import SubjectDetail from './components/admin frontend/SubjectDetail';
+import ThirdYearSubjectList from './components/admin frontend/ThirdYearSubjectList';
 
 const App = () => {
   return (
@@ -38,10 +43,21 @@ const App = () => {
 
 
 
-            
+            {/* admin routes */}
 
             {/* Upload Notes Route */}
             <Route path="/upload" element={<UploadNotes />} />
+
+
+
+            <Route path="/thirdyear/subjects" element={<ThirdYearSubjectList />} />
+<Route path="/thirdyear/subject/:subjectName" element={<SubjectDetail />} />
+<Route path="/thirdyear/subject/:subjectName/add-note" element={<AddNoteFile />} />
+
+
+
+
+
           </Routes>
         </div>
       </div>
