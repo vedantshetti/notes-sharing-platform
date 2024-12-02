@@ -5,6 +5,7 @@ import NotesListing from './pages/NotesListing';
 import UploadNotes from './pages/UploadNotes';
 import SecondYear from './components/secondyear/SecondYear';
 import ThirdYear from './components/thirdyear/ThirdYear';
+import FourthYear from './components/fourthyear/FourthYear';
 
 const App = () => {
   return (
@@ -43,6 +44,11 @@ const App = () => {
             <Route path="/3rd-year/robotics-automation" element={<NotesListing year={3} department="Robotics and Automation" />} />
             
             {/* Routes for 4th Year */}
+
+            <Route path="/4th-year" element={<FourthYear />} />
+
+
+
             <Route path="/4th-year/computer-engineering" element={<NotesListing year={4} department="Computer Engineering" />} />
             <Route path="/4th-year/electronics-telecommunication" element={<NotesListing year={4} department="Electronics and Telecommunication Engineering" />} />
             <Route path="/4th-year/information-technology" element={<NotesListing year={4} department="Information Technology" />} />
