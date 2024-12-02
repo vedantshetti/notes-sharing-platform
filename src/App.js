@@ -6,7 +6,8 @@ import SecondYear from './components/secondyear/SecondYear';
 import ThirdYear from './components/thirdyear/ThirdYear';
 import FourthYear from './components/fourthyear/FourthYear';
 import FirstYear from './components/firstyear/FirstYear';
-import DepartmentNotes from './components/thirdyear/DepartmentNotes';
+import DepartmentNotes from './components/thirdyear/DepartmentSubject';
+import DepartmentSubject from './components/thirdyear/DepartmentSubject';
 
 const App = () => {
   return (
@@ -25,7 +26,7 @@ const App = () => {
            
             {/* Routes for 3rd Year */}
             <Route path="/3rd-year" element={<ThirdYear />} />
-            <Route path="/3rd-year/:departmentName" element={<DepartmentNotes />} /> {/* Dynamic route for 3rd-year departments */}
+            <Route path="/3rd-year/:departmentName" element={<DepartmentSubject />} /> {/* Dynamic route for 3rd-year departments */}
 
 
 
