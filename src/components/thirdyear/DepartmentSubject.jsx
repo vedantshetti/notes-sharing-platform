@@ -65,7 +65,7 @@ const DepartmentSubject = () => {
                 boxShadow: '0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)', // Enhanced shadow
                 display: 'flex', // Flexbox for centering text
                 alignItems: 'center', // Center items vertically
-                justifyContent: 'center' // Center items horizontally
+                justifyContent: 'center' // Center items horizontall
               }}
             >
               <h3 className="text-lg font-semibold text-center">{subject.subject_name}</h3>
