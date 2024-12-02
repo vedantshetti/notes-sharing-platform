@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { supabase } from '../../supabaseClient';
+import React, { useEffect, useState } from "react";
+import { supabase } from "../../supabaseClient";
 
 const FirstYear = () => {
   const [notes, setNotes] = useState([]);
@@ -9,9 +9,9 @@ const FirstYear = () => {
     const fetchNotes = async () => {
       setLoading(true);
       const { data, error } = await supabase
-        .from('notes')
-        .select('*')
-        .eq('year', 1); // Fetch notes for 1st year (adjust dynamically)
+        .from("notes")
+        .select("*")
+        .eq("year", 1); // Fetch notes for 1st year (adjust dynamically)
 
       if (error) console.error(error);
       else setNotes(data);
@@ -35,13 +35,13 @@ const FirstYear = () => {
           >
             <h3 className="text-lg font-semibold">{note.title}</h3>
             <p className="text-sm text-gray-600">{note.description}</p>
-            <div className="mt-4 flex justify-between">
-              <button className="bg-blue-500 text-white py-1 px-4 rounded-md hover:bg-blue-600">
+            <div className="mt-4 flex space-x-4">
+              <button className="bg-blue-500 text-white py-1 px-2 text-sm rounded-md hover:bg-blue-600">
                 View Details
               </button>
               <a
                 href={note.file_url}
-                className="bg-green-500 text-white py-1 px-4 rounded-md hover:bg-green-600"
+                className="bg-green-500 text-white py-1 px-2 text-sm rounded-md hover:bg-green-600"
               >
                 Download Notes
               </a>
