@@ -9,13 +9,16 @@ const ThirdYear = () => {
   useEffect(() => {
     const fetchDepartments = async () => {
       setLoading(true);
+      // Fetch all departments (no need for a 'year' column filter)
       const { data, error } = await supabase
         .from('departments')
-        .select('department_name') // Fetch only department names for 3rd year
-        .eq('year', 3); // Fetch departments for 3rd year
+        .select('department_name'); // Fetch only department names
 
-      if (error) console.error(error);
-      else setDepartments(data);
+      if (error) {
+        console.error('Error fetching departments:', error);
+      } else {
+        setDepartments(data);
+      }
 
       setLoading(false);
     };
