@@ -6,6 +6,7 @@ import UploadNotes from './pages/UploadNotes';
 import SecondYear from './components/secondyear/SecondYear';
 import ThirdYear from './components/thirdyear/ThirdYear';
 import FourthYear from './components/fourthyear/FourthYear';
+import FirstYear from './components/firstyear/FirstYear';
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
         <div className="flex-1">
           <Routes>
             {/* Routes for 1st Year */}
-            <Route path="/1st-year" element={<NotesListing year={1} />} />
+            <Route path="/1st-year" element={<FirstYear year={1} />} />
             
             {/* Routes for 2nd Year */}
             <Route path="/2nd-year" element={<SecondYear />} /> {/* Display departments for 2nd year */}
