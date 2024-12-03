@@ -18,6 +18,9 @@ import DepartmentSubjectSecondYear from './components/secondyear/DepartmentSubje
 import SubjectNotesSecondYear from './components/secondyear/SubjectNotesSecondYear';
 import SubjectNotesFourthYear from './components/fourthyear/SubjectNotesFourthYear';
 import DepartmentSubjectFourthYear from './components/fourthyear/DepartmentSubjectFourthYear';
+import AdminPage from './components/admin/AdminPage';
+import DepartmentSubjects from './components/admin/DepartmentSubjects';
+import AddNotesPage from './components/admin/AddNotesPage';
 
 const App = () => {
   return (
@@ -61,6 +64,14 @@ const App = () => {
 
             {/* Upload Notes Route */}
             <Route path="/upload" element={<UploadNotes />} />
+
+
+            <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/:year/:departmentName" element={<DepartmentSubjects />} />
+        <Route
+          path="/admin/:year/:departmentName/:subjectName"
+          element={<AddNotesPage />}
+        />
 
 
 
