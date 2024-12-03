@@ -30,12 +30,10 @@ const Sidebar = () => {
       }
     );
   
-    // No need to unsubscribe manually as the listener cleans up on unmount
     return () => {
       // No need to call authListener.unsubscribe() here anymore
     };
   }, []);
-  
 
   // Function to handle Google login
   const handleGoogleLogin = async () => {
@@ -119,77 +117,55 @@ const Sidebar = () => {
             </button>
           </div>
           <nav className="flex flex-col p-4">
-            <Link
-              to="/1st-year"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              1st Year
-            </Link>
-            <Link
-              to="/2nd-year"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              2nd Year
-            </Link>
-            <Link
-              to="/3rd-year"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              3rd Year
-            </Link>
-            <Link
-              to="/4th-year"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              4th Year
-            </Link>
-            <Link
-              to="/upload"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              Upload Notes
-            </Link>
+            <Link to="/1st-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">1st Year</Link>
+            <Link to="/2nd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">2nd Year</Link>
+            <Link to="/3rd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">3rd Year</Link>
+            <Link to="/4th-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">4th Year</Link>
+            <Link to="/upload" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">Upload Notes</Link>
 
-            {/* Login Section */}
-            {user ? (
-              <div className="mt-4">
-                <button
-                  onClick={handleLogout}
-                  className="w-full bg-red-500 text-white p-2 rounded-md"
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="mt-4">
-                <button
-                  onClick={handleGoogleLogin}
-                  className="w-full mb-2 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center"
-                >
-                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png"
-                      alt="Google Logo"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                  <span className="ml-2">Google Login</span>
-                </button>
-                <button
-                  onClick={handleGitHubLogin}
-                  className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center"
-                >
-                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                      alt="GitHub Logo"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                  <span className="ml-2">GitHub Login</span>
-                </button>
-              </div>
-            )}
+            {/* Account Section */}
+            <div className="mt-4">
+              <h2 className="text-lg font-semibold text-gray-800">Account</h2>
+              {user ? (
+                <div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full bg-red-500 text-white p-2 rounded-md mt-2"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <button
+                    onClick={handleGoogleLogin}
+                    className="w-full mb-2 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center"
+                  >
+                    <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                      <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png"
+                        alt="Google Logo"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                    <span className="ml-2">Google Login</span>
+                  </button>
+                  <button
+                    onClick={handleGitHubLogin}
+                    className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center"
+                  >
+                    <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                      <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                        alt="GitHub Logo"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                    <span className="ml-2">GitHub Login</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </nav>
         </div>
 
@@ -199,77 +175,55 @@ const Sidebar = () => {
             <h1 className="text-2xl font-bold text-gray-800">xxyyzz</h1>
           </div>
           <nav className="flex flex-col p-4">
-            <Link
-              to="/1st-year"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              1st Year
-            </Link>
-            <Link
-              to="/2nd-year"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              2nd Year
-            </Link>
-            <Link
-              to="/3rd-year"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              3rd Year
-            </Link>
-            <Link
-              to="/4th-year"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              4th Year
-            </Link>
-            <Link
-              to="/upload"
-              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
-            >
-              Upload Notes
-            </Link>
+            <Link to="/1st-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">1st Year</Link>
+            <Link to="/2nd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">2nd Year</Link>
+            <Link to="/3rd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">3rd Year</Link>
+            <Link to="/4th-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">4th Year</Link>
+            <Link to="/upload" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">Upload Notes</Link>
 
-            {/* Login Section */}
-            {user ? (
-              <div className="mt-4">
-                <button
-                  onClick={handleLogout}
-                  className="w-full bg-red-500 text-white p-2 rounded-md"
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="mt-4">
-                <button
-                  onClick={handleGoogleLogin}
-                  className="w-full mb-2 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center"
-                >
-                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png"
-                      alt="Google Logo"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                  <span className="ml-2">Google Login</span>
-                </button>
-                <button
-                  onClick={handleGitHubLogin}
-                  className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center"
-                >
-                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                      alt="GitHub Logo"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                  <span className="ml-2">GitHub Login</span>
-                </button>
-              </div>
-            )}
+            {/* Account Section */}
+            <div className="mt-4">
+              <h2 className="text-lg font-semibold text-gray-800">Account</h2>
+              {user ? (
+                <div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full bg-red-500 text-white p-2 rounded-md mt-2"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <button
+                    onClick={handleGoogleLogin}
+                    className="w-full mb-2 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center"
+                  >
+                    <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                      <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png"
+                        alt="Google Logo"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                    <span className="ml-2">Google Login</span>
+                  </button>
+                  <button
+                    onClick={handleGitHubLogin}
+                    className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center"
+                  >
+                    <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                      <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                        alt="GitHub Logo"
+                        className="w-4 h-4"
+                      />
+                    </div>
+                    <span className="ml-2">GitHub Login</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </nav>
         </div>
 
