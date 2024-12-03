@@ -14,6 +14,8 @@ import AddNoteFile from './components/AddNoteFile/AddNoteFile';
 
 import SubjectDetail from './components/admin frontend/SubjectDetail';
 import ThirdYearSubjectList from './components/admin frontend/ThirdYearSubjectList';
+import DepartmentSubjectSecondYear from './components/secondyear/DepartmentSubjectSecondYear';
+import SubjectNotesSecondYear from './components/secondyear/SubjectNotesSecondYear';
 
 const App = () => {
   return (
@@ -27,6 +29,8 @@ const App = () => {
             
             {/* Routes for 2nd Year */}
             <Route path="/2nd-year" element={<SecondYear />} /> {/* Display departments for 2nd year */}
+            <Route path="/2nd-year/:departmentName" element={<DepartmentSubjectSecondYear />} /> {/* Dynamic route for 2nd-year departments */}
+            <Route path="/2nd-year/:departmentName/:subjectName" element={<SubjectNotesSecondYear />} /> 
 
 
            
@@ -35,6 +39,9 @@ const App = () => {
             <Route path="/3rd-year/:departmentName" element={<DepartmentSubject />} /> {/* Dynamic route for 3rd-year departments */}
 
             <Route path="/3rd-year/:departmentName/:subjectName" element={<SubjectNotes />}/>
+            <Route path="/thirdyear/subjects" element={<ThirdYearSubjectList />} />
+            <Route path="/thirdyear/subject/:subjectName" element={<SubjectDetail />} />
+            <Route path="/thirdyear/subject/:subjectName/add-note" element={<AddNoteFile />} />
 
             
             {/* Routes for 4th Year */}
@@ -47,12 +54,6 @@ const App = () => {
 
             {/* Upload Notes Route */}
             <Route path="/upload" element={<UploadNotes />} />
-
-
-
-            <Route path="/thirdyear/subjects" element={<ThirdYearSubjectList />} />
-<Route path="/thirdyear/subject/:subjectName" element={<SubjectDetail />} />
-<Route path="/thirdyear/subject/:subjectName/add-note" element={<AddNoteFile />} />
 
 
 
