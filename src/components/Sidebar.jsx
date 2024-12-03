@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
+  // Toggle sidebar visibility
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -12,11 +15,62 @@ const Sidebar = () => {
     setIsOpen(false);
   };
 
+  // Fetch user session when the component mounts or when the session changes
+  useEffect(() => {
+    const fetchSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+    };
+  
+    fetchSession();
+  
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+  
+    // No need to unsubscribe manually as the listener cleans up on unmount
+    return () => {
+      // No need to call authListener.unsubscribe() here anymore
+    };
+  }, []);
+  
+
+  // Function to handle Google login
+  const handleGoogleLogin = async () => {
+    const { user, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
+    if (error) {
+      console.error('Error logging in with Google:', error.message);
+    } else {
+      console.log('Google login successful', user);
+    }
+  };
+
+  // Function to handle GitHub login
+  const handleGitHubLogin = async () => {
+    const { user, error } = await supabase.auth.signInWithOAuth({
+      provider: 'github',
+    });
+    if (error) {
+      console.error('Error logging in with GitHub:', error.message);
+    } else {
+      console.log('GitHub login successful', user);
+    }
+  };
+
+  // Function to handle logout
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    console.log('Logged out successfully');
+  };
+
   return (
     <div>
-      {/* Container for sidebar and main content */}
       <div className="lg:flex">
-        {/* Mobile menu button */}
         <div className="lg:hidden flex justify-between p-4">
           <button onClick={toggleSidebar} className="text-black">
             <svg
@@ -95,6 +149,47 @@ const Sidebar = () => {
             >
               Upload Notes
             </Link>
+
+            {/* Login Section */}
+            {user ? (
+              <div className="mt-4">
+                <button
+                  onClick={handleLogout}
+                  className="w-full bg-red-500 text-white p-2 rounded-md"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="mt-4">
+                <button
+                  onClick={handleGoogleLogin}
+                  className="w-full mb-2 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center"
+                >
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png"
+                      alt="Google Logo"
+                      className="w-4 h-4"
+                    />
+                  </div>
+                  <span className="ml-2">Google Login</span>
+                </button>
+                <button
+                  onClick={handleGitHubLogin}
+                  className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center"
+                >
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                      alt="GitHub Logo"
+                      className="w-4 h-4"
+                    />
+                  </div>
+                  <span className="ml-2">GitHub Login</span>
+                </button>
+              </div>
+            )}
           </nav>
         </div>
 
@@ -134,13 +229,53 @@ const Sidebar = () => {
             >
               Upload Notes
             </Link>
+
+            {/* Login Section */}
+            {user ? (
+              <div className="mt-4">
+                <button
+                  onClick={handleLogout}
+                  className="w-full bg-red-500 text-white p-2 rounded-md"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="mt-4">
+                <button
+                  onClick={handleGoogleLogin}
+                  className="w-full mb-2 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center"
+                >
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png"
+                      alt="Google Logo"
+                      className="w-4 h-4"
+                    />
+                  </div>
+                  <span className="ml-2">Google Login</span>
+                </button>
+                <button
+                  onClick={handleGitHubLogin}
+                  className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center"
+                >
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                      alt="GitHub Logo"
+                      className="w-4 h-4"
+                    />
+                  </div>
+                  <span className="ml-2">GitHub Login</span>
+                </button>
+              </div>
+            )}
           </nav>
         </div>
 
         {/* Main content area */}
         <div className="lg:w-[calc(100%-250px)] lg:ml-[250px] flex-1 p-6">
           {/* The main content of the page goes here */}
-          {/* You can add your content components for each page */}
         </div>
       </div>
     </div>
