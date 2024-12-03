@@ -16,6 +16,8 @@ import SubjectDetail from './components/admin frontend/SubjectDetail';
 import ThirdYearSubjectList from './components/admin frontend/ThirdYearSubjectList';
 import DepartmentSubjectSecondYear from './components/secondyear/DepartmentSubjectSecondYear';
 import SubjectNotesSecondYear from './components/secondyear/SubjectNotesSecondYear';
+import SubjectNotesFourthYear from './components/fourthyear/SubjectNotesFourthYear';
+import DepartmentSubjectFourthYear from './components/fourthyear/DepartmentSubjectFourthYear';
 
 const App = () => {
   return (
@@ -47,6 +49,11 @@ const App = () => {
             {/* Routes for 4th Year */}
 
             <Route path="/4th-year" element={<FourthYear />} />
+            <Route path="/4th-year/:departmentName" element={<DepartmentSubjectFourthYear />} />
+
+            <Route path="/4th-year/:departmentName/:subjectName" element={<SubjectNotesFourthYear />}
+  />
+
 
 
 
