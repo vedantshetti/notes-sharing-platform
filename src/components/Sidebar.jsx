@@ -67,16 +67,32 @@ const Sidebar = () => {
           </button>
         </div>
         <nav className="flex flex-col p-4">
-          <Link to="/1st-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/1st-year"
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            onClick={closeSidebar} // Close sidebar on click
+          >
             1st Year
           </Link>
-          <Link to="/2nd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/2nd-year"
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            onClick={closeSidebar} // Close sidebar on click
+          >
             2nd Year
           </Link>
-          <Link to="/3rd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/3rd-year"
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            onClick={closeSidebar} // Close sidebar on click
+          >
             3rd Year
           </Link>
-          <Link to="/4th-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/4th-year"
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            onClick={closeSidebar} // Close sidebar on click
+          >
             4th Year
           </Link>
 
@@ -86,7 +102,10 @@ const Sidebar = () => {
             {user ? (
               <Link
                 to="/auth/logout"
-                onClick={handleLogout}
+                onClick={() => {
+                  handleLogout();
+                  closeSidebar(); // Close sidebar on logout
+                }}
                 className="w-full text-gray-700 flex items-center mb-2 p-2 rounded-md hover:bg-blue-200"
               >
                 <FontAwesomeIcon icon={faRightFromBracket} className="w-5 h-5 mr-2" />
@@ -96,6 +115,7 @@ const Sidebar = () => {
               <>
                 <Link
                   to="/auth/login"
+                  onClick={closeSidebar} // Close sidebar on click
                   className="w-full text-gray-700 flex items-center mb-2 p-2 rounded-md hover:bg-blue-200"
                 >
                   <FontAwesomeIcon icon={faRightToBracket} className="w-5 h-5 mr-2" />
@@ -103,6 +123,7 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   to="/auth/register"
+                  onClick={closeSidebar} // Close sidebar on click
                   className="w-full text-gray-700 flex items-center p-2 rounded-md hover:bg-blue-200"
                 >
                   <FontAwesomeIcon icon={faUserPlus} className="w-5 h-5 mr-2" />
