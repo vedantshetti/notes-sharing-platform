@@ -41,12 +41,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-100 to-blue-300">
+    <div className="flex justify-center items-center h-screen bg-white"> {/* Changed the background to white */}
       <div className="bg-white p-8 rounded-md shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">Welcome Back!</h2>
         {error && <div className="bg-red-100 text-red-600 p-2 rounded mb-4">{error}</div>}
         {successMessage && <div className="bg-green-100 text-green-700 p-2 rounded mb-4">{successMessage}</div>}
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="email" className="block font-semibold text-gray-700">Email</label>

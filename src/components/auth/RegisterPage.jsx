@@ -30,7 +30,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-100 to-blue-300">
+    <div className="flex justify-center items-center h-screen bg-white"> {/* Changed the background to white */}
       <div className="bg-white p-8 rounded-md shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">
           Create an Account

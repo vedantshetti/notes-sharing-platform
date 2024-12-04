@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchSession, onAuthStateChange, handleLogout } from "./auth/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+// import { faRightToBracket, faUserPlus } from "@fortawesome/free-regular-svg-icons";
+// import { faRightToBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -107,32 +112,39 @@ const Sidebar = () => {
               4th Year
             </Link>
 
-            {/* Account Section */}
+            {/* Auth Section */}
             <div className="mt-4">
               <h2 className="text-lg font-semibold text-gray-800">Account</h2>
               {user ? (
-                <div>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full bg-red-500 text-white p-2 rounded-md mt-2"
-                  >
-                    Logout
-                  </button>
-                </div>
-              ) : (
-                <Link
-                  to="/auth"
-                  className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center mt-2"
+                <button
+                  onClick={handleLogout}
+                  className="w-full bg-red-500 text-white p-2 rounded-md mt-2"
                 >
-                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/4/4b/User_icon_2.svg"
-                      alt="Account Icon"
-                      className="w-4 h-4"
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/auth/login"
+                    className="w-full text-gray-700 flex items-center mb-2 p-2 rounded-md hover:bg-blue-200"
+                  >
+                    <FontAwesomeIcon
+                      icon={faRightToBracket}
+                      className="w-5 h-5 mr-2"
                     />
-                  </div>
-                  <span className="ml-2">Account</span>
-                </Link>
+                    Login
+                  </Link>
+                  <Link
+                    to="/auth/register"
+                    className="w-full text-gray-700 flex items-center p-2 rounded-md hover:bg-blue-200"
+                  >
+                    <FontAwesomeIcon
+                      icon={faUserPlus}
+                      className="w-5 h-5 mr-2"
+                    />
+                    Register
+                  </Link>
+                </>
               )}
             </div>
           </nav>
@@ -169,32 +181,39 @@ const Sidebar = () => {
               4th Year
             </Link>
 
-            {/* Account Section */}
+            {/* Auth Section */}
             <div className="mt-4">
               <h2 className="text-lg font-semibold text-gray-800">Account</h2>
               {user ? (
-                <div>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full bg-red-500 text-white p-2 rounded-md mt-2"
-                  >
-                    Logout
-                  </button>
-                </div>
-              ) : (
-                <Link
-                  to="/auth"
-                  className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center mt-2"
+                <button
+                  onClick={handleLogout}
+                  className="w-full bg-red-500 text-white p-2 rounded-md mt-2"
                 >
-                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/4/4b/User_icon_2.svg"
-                      alt="Account Icon"
-                      className="w-4 h-4"
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/auth/login"
+                    className="w-full text-gray-700 flex items-center mb-2 p-2 rounded-md hover:bg-blue-200"
+                  >
+                    <FontAwesomeIcon
+                      icon={faRightToBracket}
+                      className="w-5 h-5 mr-2"
                     />
-                  </div>
-                  <span className="ml-2">Account</span>
-                </Link>
+                    Login
+                  </Link>
+                  <Link
+                    to="/auth/register"
+                    className="w-full text-gray-700 flex items-center p-2 rounded-md hover:bg-blue-200"
+                  >
+                    <FontAwesomeIcon
+                      icon={faUserPlus}
+                      className="w-5 h-5 mr-2"
+                    />
+                    Register
+                  </Link>
+                </>
               )}
             </div>
           </nav>

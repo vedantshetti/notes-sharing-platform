@@ -36,7 +36,7 @@ const PrivateRoute = ({ element }) => {
       const session = await fetchSession(); // Fetch current session
       if (!session) {
         // Redirect to /auth if not authenticated
-        navigate('/auth');
+        navigate('/auth/login');
       } else {
         setIsAuthenticated(true);
       }
