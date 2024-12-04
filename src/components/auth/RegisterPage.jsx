@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { handleSignUp, handleGoogleLogin, handleGitHubLogin } from './auth';
 import { useNavigate } from 'react-router-dom';
 
+// Import images from src/assets
+import googleLogo from '../../assets/google.png';
+import githubLogo from '../../assets/github.png';
+
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,32 +75,29 @@ const RegisterPage = () => {
 
         <div className="my-4 text-center">OR</div>
 
-        <button
-          onClick={handleGoogleLogin}
-          className="w-full mb-2 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center"
-        >
-          <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+        {/* Simplified Google and GitHub Login Icons */}
+        <div className="flex justify-center space-x-6">
+          <div
+            onClick={handleGoogleLogin}
+            className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 cursor-pointer hover:bg-gray-200"
+          >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png"
+              src={googleLogo}
               alt="Google Logo"
-              className="w-4 h-4"
+              className="w-6 h-6"
             />
           </div>
-          <span className="ml-2">Google Login</span>
-        </button>
-        <button
-          onClick={handleGitHubLogin}
-          className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center"
-        >
-          <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+          <div
+            onClick={handleGitHubLogin}
+            className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 cursor-pointer hover:bg-gray-200"
+          >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+              src={githubLogo}
               alt="GitHub Logo"
-              className="w-4 h-4"
+              className="w-6 h-6"
             />
           </div>
-          <span className="ml-2">GitHub Login</span>
-        </button>
+        </div>
 
         <div className="text-center mt-4">
           <span className="text-blue-600">
