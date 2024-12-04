@@ -62,8 +62,8 @@ const App = () => {
 
             {/* Routes for 2nd Year */}
             <Route path="/2nd-year" element={<PrivateRoute element={<SecondYear />}/>} />
-            <Route path="/2nd-year/:departmentName" element={<DepartmentSubjectSecondYear />} />
-            <Route path="/2nd-year/:departmentName/:subjectName" element={<SubjectNotesSecondYear />} />
+            <Route path="/2nd-year/:departmentName" element={<PrivateRoute element={<DepartmentSubjectSecondYear />}/>} />
+            <Route path="/2nd-year/:departmentName/:subjectName" element={<PrivateRoute element={<SubjectNotesSecondYear />}/>} />
 
             {/* Routes for 3rd Year */}
             <Route path="/3rd-year" element={<PrivateRoute element={<ThirdYear />} />} />
@@ -81,9 +81,9 @@ const App = () => {
             {/* Admin Routes */}
             <Route path="/upload" element={<UploadNotes />} />
 
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/admin/:year/:departmentName" element={<DepartmentSubjects />} />
-            <Route path="/admin/:year/:departmentName/:subjectName" element={<AddNotesPage />} />
+            <Route path="/admin" element={<PrivateRoute element={<AdminPage />}/>} />
+            <Route path="/admin/:year/:departmentName" element={<PrivateRoute element={<DepartmentSubjects />} />} />
+            <Route path="/admin/:year/:departmentName/:subjectName" element={<PrivateRoute element={<AddNotesPage />}/>} />
 
             {/* Auth Routes */}
             <Route path="/auth" element={<AuthPage />} />
