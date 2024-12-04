@@ -21,6 +21,7 @@ import DepartmentSubjectFourthYear from './components/fourthyear/DepartmentSubje
 import AdminPage from './components/admin/AdminPage';
 import DepartmentSubjects from './components/admin/DepartmentSubjects';
 import AddNotesPage from './components/admin/AddNotesPage';
+import AuthPage from './AuthPage';
 
 const App = () => {
   return (
@@ -72,6 +73,11 @@ const App = () => {
           path="/admin/:year/:departmentName/:subjectName"
           element={<AddNotesPage />}
         />
+
+
+        {/* auth Routes  */}
+
+        <Route path="/auth" element={<AuthPage />} />
 
 
 

@@ -1,6 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { supabase } from '../supabaseClient';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  fetchSession,
+  onAuthStateChange,
+  handleGoogleLogin,
+  handleGitHubLogin,
+  handleLogout,
+} from "./auth/auth";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,56 +21,21 @@ const Sidebar = () => {
     setIsOpen(false);
   };
 
-  // Fetch user session when the component mounts or when the session changes
+  // Fetch user session and listen for auth changes
   useEffect(() => {
-    const fetchSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user ?? null);
+    const initializeAuth = async () => {
+      const user = await fetchSession();
+      setUser(user);
     };
-  
-    fetchSession();
-  
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null);
-      }
-    );
-  
+
+    initializeAuth();
+
+    const { data: authListener } = onAuthStateChange(setUser);
+
     return () => {
-      // No need to call authListener.unsubscribe() here anymore
+      authListener.subscription.unsubscribe();
     };
   }, []);
-
-  // Function to handle Google login
-  const handleGoogleLogin = async () => {
-    const { user, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-    });
-    if (error) {
-      console.error('Error logging in with Google:', error.message);
-    } else {
-      console.log('Google login successful', user);
-    }
-  };
-
-  // Function to handle GitHub login
-  const handleGitHubLogin = async () => {
-    const { user, error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-    });
-    if (error) {
-      console.error('Error logging in with GitHub:', error.message);
-    } else {
-      console.log('GitHub login successful', user);
-    }
-  };
-
-  // Function to handle logout
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    console.log('Logged out successfully');
-  };
 
   return (
     <div>
@@ -91,11 +62,11 @@ const Sidebar = () => {
         {/* Sidebar for mobile */}
         <div
           className={`lg:hidden w-[57%] h-screen bg-white shadow-lg transition-transform duration-300 transform ${
-            isOpen ? 'translate-x-0' : '-translate-x-full'
+            isOpen ? "translate-x-0" : "-translate-x-full"
           } fixed inset-0 z-50`}
         >
           <div className="flex justify-between p-6 border-b border-gray-300">
-            <h1 className="text-2xl font-bold text-gray-800">xxyyzz</h1>
+            <h1 className="text-2xl font-bold text-gray-800">NotesBank</h1>
             <button
               onClick={closeSidebar}
               className="border border-gray-400 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-200"
@@ -117,11 +88,30 @@ const Sidebar = () => {
             </button>
           </div>
           <nav className="flex flex-col p-4">
-            <Link to="/1st-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">1st Year</Link>
-            <Link to="/2nd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">2nd Year</Link>
-            <Link to="/3rd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">3rd Year</Link>
-            <Link to="/4th-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">4th Year</Link>
-            <Link to="/upload" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">Upload Notes</Link>
+            <Link
+              to="/1st-year"
+              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            >
+              1st Year
+            </Link>
+            <Link
+              to="/2nd-year"
+              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            >
+              2nd Year
+            </Link>
+            <Link
+              to="/3rd-year"
+              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            >
+              3rd Year
+            </Link>
+            <Link
+              to="/4th-year"
+              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            >
+              4th Year
+            </Link>
 
             {/* Account Section */}
             <div className="mt-4">
@@ -172,14 +162,33 @@ const Sidebar = () => {
         {/* Sidebar for large screens (fixed on the left) */}
         <div className="lg:block hidden w-[250px] bg-white shadow-lg fixed inset-y-0 left-0 z-50">
           <div className="flex justify-between p-6 border-b border-gray-300">
-            <h1 className="text-2xl font-bold text-gray-800">xxyyzz</h1>
+            <h1 className="text-2xl font-bold text-gray-800">NotesBank</h1>
           </div>
           <nav className="flex flex-col p-4">
-            <Link to="/1st-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">1st Year</Link>
-            <Link to="/2nd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">2nd Year</Link>
-            <Link to="/3rd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">3rd Year</Link>
-            <Link to="/4th-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">4th Year</Link>
-            <Link to="/upload" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">Upload Notes</Link>
+            <Link
+              to="/1st-year"
+              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            >
+              1st Year
+            </Link>
+            <Link
+              to="/2nd-year"
+              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            >
+              2nd Year
+            </Link>
+            <Link
+              to="/3rd-year"
+              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            >
+              3rd Year
+            </Link>
+            <Link
+              to="/4th-year"
+              className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+            >
+              4th Year
+            </Link>
 
             {/* Account Section */}
             <div className="mt-4">
