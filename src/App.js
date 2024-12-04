@@ -23,6 +23,8 @@ import DepartmentSubjects from './components/admin/DepartmentSubjects';
 import AddNotesPage from './components/admin/AddNotesPage';
 import AuthPage from './AuthPage';
 import { fetchSession } from './components/auth/auth'; // Assuming this function checks session status
+import LoginPage from './components/auth/LoginPage';
+import RegisterPage from './components/auth/RegisterPage';
 
 // PrivateRoute component to protect authenticated routes
 const PrivateRoute = ({ element }) => {
@@ -86,7 +88,9 @@ const App = () => {
             <Route path="/admin/:year/:departmentName/:subjectName" element={<PrivateRoute element={<AddNotesPage />}/>} />
 
             {/* Auth Routes */}
-            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/auth/login" element={<LoginPage />} />
+        <Route path="/auth/register" element={<RegisterPage />} />
+
 
             {/* Private Routes - Only accessible if authenticated */}
             <Route

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { handleSignIn, handleSignUp } from './components/auth/auth';
+import { handleGitHubLogin, handleGoogleLogin, handleSignIn, handleSignUp } from './components/auth/auth';
 import { fetchSession } from './components/auth/auth'; // Assuming this function checks session status
 import { useNavigate } from 'react-router-dom';
 
@@ -103,6 +103,36 @@ const AuthPage = () => {
             {isLogin ? 'Login' : 'Register'}
           </button>
         </form>
+        {!isLogin && (
+          <div>
+            <button
+              onClick={handleGoogleLogin}
+              className="w-full mb-2 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center"
+            >
+              <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png"
+                  alt="Google Logo"
+                  className="w-4 h-4"
+                />
+              </div>
+              <span className="ml-2">Google Login</span>
+            </button>
+            <button
+              onClick={handleGitHubLogin}
+              className="w-full bg-gray-800 text-white p-2 rounded-md flex items-center justify-center"
+            >
+              <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+                  alt="GitHub Logo"
+                  className="w-4 h-4"
+                />
+              </div>
+              <span className="ml-2">GitHub Login</span>
+            </button>
+          </div>
+        )}
         <div className="text-center mt-4">
           <button
             onClick={toggleAuthMode}
