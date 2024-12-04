@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import UploadNotes from './pages/UploadNotes';
 import SecondYear from './components/secondyear/SecondYear';
@@ -22,6 +22,33 @@ import AdminPage from './components/admin/AdminPage';
 import DepartmentSubjects from './components/admin/DepartmentSubjects';
 import AddNotesPage from './components/admin/AddNotesPage';
 import AuthPage from './AuthPage';
+import { fetchSession } from './components/auth/auth'; // Assuming this function checks session status
+
+// PrivateRoute component to protect authenticated routes
+const PrivateRoute = ({ element }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(null); // To hold the authentication status
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const session = await fetchSession(); // Fetch current session
+      if (!session) {
+        // Redirect to /auth if not authenticated
+        navigate('/auth');
+      } else {
+        setIsAuthenticated(true);
+      }
+    };
+    checkAuth();
+  }, [navigate]);
+
+  // If authentication is still loading, show a loading state
+  if (isAuthenticated === null) {
+    return <div>Loading...</div>;
+  }
+
+  return isAuthenticated ? element : null;
+};
 
 const App = () => {
   return (
@@ -32,44 +59,45 @@ const App = () => {
           <Routes>
             {/* Routes for 1st Year */}
             <Route path="/1st-year" element={<FirstYear year={1} />} />
-            
+
             {/* Routes for 2nd Year */}
-            <Route path="/2nd-year" element={<SecondYear />} /> {/* Display departments for 2nd year */}
-            <Route path="/2nd-year/:departmentName" element={<DepartmentSubjectSecondYear />} /> {/* Dynamic route for 2nd-year departments */}
-            <Route path="/2nd-year/:departmentName/:subjectName" element={<SubjectNotesSecondYear />} /> 
+            <Route path="/2nd-year" element={<PrivateRoute element={<SecondYear />}/>} />
+            <Route path="/2nd-year/:departmentName" element={<DepartmentSubjectSecondYear />} />
+            <Route path="/2nd-year/:departmentName/:subjectName" element={<SubjectNotesSecondYear />} />
 
             {/* Routes for 3rd Year */}
-            <Route path="/3rd-year" element={<ThirdYear />} />
-            <Route path="/3rd-year/:departmentName" element={<DepartmentSubject />} /> {/* Dynamic route for 3rd-year departments */}
+            <Route path="/3rd-year" element={<PrivateRoute element={<ThirdYear />} />} />
+            <Route path="/3rd-year/:departmentName" element={<PrivateRoute element={<DepartmentSubject />}/>} />
+            <Route path="/3rd-year/:departmentName/:subjectName" element={<PrivateRoute element={<SubjectNotes />}/>} />
+            <Route path="/thirdyear/subjects" element={<PrivateRoute element={<ThirdYearSubjectList />}/>} />
+            <Route path="/thirdyear/subject/:subjectName" element={<PrivateRoute element={<SubjectDetail />} />} />
+            <Route path="/thirdyear/subject/:subjectName/add-note" element={<PrivateRoute element={<AddNoteFile />}/>} />
 
-            <Route path="/3rd-year/:departmentName/:subjectName" element={<SubjectNotes />}/>
-            <Route path="/thirdyear/subjects" element={<ThirdYearSubjectList />} />
-            <Route path="/thirdyear/subject/:subjectName" element={<SubjectDetail />} />
-            <Route path="/thirdyear/subject/:subjectName/add-note" element={<AddNoteFile />} />
-
-            
             {/* Routes for 4th Year */}
+            <Route path="/4th-year" element={<PrivateRoute element={<FourthYear />}/> }/>
+            <Route path="/4th-year/:departmentName" element={<PrivateRoute element={<DepartmentSubjectFourthYear />} />} />
+            <Route path="/4th-year/:departmentName/:subjectName" element={<PrivateRoute element={<SubjectNotesFourthYear />}/>} />
 
-            <Route path="/4th-year" element={<FourthYear />} />
-            <Route path="/4th-year/:departmentName" element={<DepartmentSubjectFourthYear />} />
-
-            <Route path="/4th-year/:departmentName/:subjectName" element={<SubjectNotesFourthYear />}
-  />
-            {/* admin routes */}
-
-            {/* Upload Notes Route */}
+            {/* Admin Routes */}
             <Route path="/upload" element={<UploadNotes />} />
 
-
             <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin/:year/:departmentName" element={<DepartmentSubjects />} />
-        <Route
-          path="/admin/:year/:departmentName/:subjectName"
-          element={<AddNotesPage />}
-        />
-        {/* auth Routes  */}
+            <Route path="/admin/:year/:departmentName" element={<DepartmentSubjects />} />
+            <Route path="/admin/:year/:departmentName/:subjectName" element={<AddNotesPage />} />
 
-        <Route path="/auth" element={<AuthPage />} />
+            {/* Auth Routes */}
+            <Route path="/auth" element={<AuthPage />} />
+
+            {/* Private Routes - Only accessible if authenticated */}
+            <Route
+              path="/admin"
+              element={<PrivateRoute element={<AdminPage />} />}
+            />
+            {/* Apply the PrivateRoute to any other routes that require authentication */}
+            <Route
+              path="/upload"
+              element={<PrivateRoute element={<UploadNotes />} />}
+            />
           </Routes>
         </div>
       </div>
