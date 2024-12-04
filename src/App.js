@@ -21,7 +21,7 @@ import DepartmentSubjectFourthYear from './components/fourthyear/DepartmentSubje
 import AdminPage from './components/admin/AdminPage';
 import DepartmentSubjects from './components/admin/DepartmentSubjects';
 import AddNotesPage from './components/admin/AddNotesPage';
-import AuthPage from './AuthPage';
+
 import { fetchSession } from './components/auth/auth'; // Assuming this function checks session status
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
