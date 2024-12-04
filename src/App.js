@@ -55,7 +55,7 @@ const PrivateRoute = ({ element }) => {
 const App = () => {
   return (
     <Router>
-      <div className="flex">
+      
         <Sidebar />
         <div className="flex-1">
           <Routes>
@@ -104,7 +104,7 @@ const App = () => {
             />
           </Routes>
         </div>
-      </div>
+    
     </Router>
   );
 };
