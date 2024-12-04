@@ -38,8 +38,6 @@ const App = () => {
             <Route path="/2nd-year/:departmentName" element={<DepartmentSubjectSecondYear />} /> {/* Dynamic route for 2nd-year departments */}
             <Route path="/2nd-year/:departmentName/:subjectName" element={<SubjectNotesSecondYear />} /> 
 
-
-           
             {/* Routes for 3rd Year */}
             <Route path="/3rd-year" element={<ThirdYear />} />
             <Route path="/3rd-year/:departmentName" element={<DepartmentSubject />} /> {/* Dynamic route for 3rd-year departments */}
@@ -57,10 +55,6 @@ const App = () => {
 
             <Route path="/4th-year/:departmentName/:subjectName" element={<SubjectNotesFourthYear />}
   />
-
-
-
-
             {/* admin routes */}
 
             {/* Upload Notes Route */}
@@ -73,16 +67,9 @@ const App = () => {
           path="/admin/:year/:departmentName/:subjectName"
           element={<AddNotesPage />}
         />
-
-
         {/* auth Routes  */}
 
         <Route path="/auth" element={<AuthPage />} />
-
-
-
-
-
           </Routes>
         </div>
       </div>
