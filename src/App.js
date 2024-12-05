@@ -26,6 +26,7 @@ import { fetchSession } from './components/auth/auth'; // Assuming this function
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
 import SubjectNotesFirstYear from './components/firstyear/SubjectNotesFirstYear';
+import Chat from './components/chat/Chat';
 
 // PrivateRoute component to protect authenticated routes
 const PrivateRoute = ({ element }) => {
@@ -105,7 +106,15 @@ const App = () => {
               path="/upload"
               element={<PrivateRoute element={<UploadNotes />} />}
             />
+
+
+              {/* Chat Route */}
+              <Route path="/chat" element={<PrivateRoute element={<Chat />} />} /> 
           </Routes>
+
+
+              
+
         </div>
     
     </Router>
