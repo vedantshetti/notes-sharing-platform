@@ -68,16 +68,32 @@ const Sidebar = () => {
           </button>
         </div>
         <nav className="flex flex-col p-4">
-          <Link to="/1st-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/1st-year"
+            onClick={closeSidebar}
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+          >
             1st Year
           </Link>
-          <Link to="/2nd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/2nd-year"
+            onClick={closeSidebar}
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+          >
             2nd Year
           </Link>
-          <Link to="/3rd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/3rd-year"
+            onClick={closeSidebar}
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+          >
             3rd Year
           </Link>
-          <Link to="/4th-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/4th-year"
+            onClick={closeSidebar}
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+          >
             4th Year
           </Link>
 
@@ -86,6 +102,7 @@ const Sidebar = () => {
             <h2 className="text-lg font-semibold text-gray-800">Community</h2>
             <Link
               to="/chat"
+              onClick={closeSidebar}
               className="w-full text-gray-700 flex items-center mb-2 p-2 rounded-md hover:bg-blue-200"
             >
               <FontAwesomeIcon icon={faRocketchat} className="w-5 h-5 mr-2" />
@@ -109,6 +126,7 @@ const Sidebar = () => {
               <>
                 <Link
                   to="/auth/login"
+                  onClick={closeSidebar}
                   className="w-full text-gray-700 flex items-center mb-2 p-2 rounded-md hover:bg-blue-200"
                 >
                   <FontAwesomeIcon icon={faRightToBracket} className="w-5 h-5 mr-2" />
@@ -116,6 +134,7 @@ const Sidebar = () => {
                 </Link>
                 <Link
                   to="/auth/register"
+                  onClick={closeSidebar}
                   className="w-full text-gray-700 flex items-center p-2 rounded-md hover:bg-blue-200"
                 >
                   <FontAwesomeIcon icon={faUserPlus} className="w-5 h-5 mr-2" />
@@ -133,16 +152,28 @@ const Sidebar = () => {
           <h1 className="text-2xl font-bold text-gray-800">NotesBank</h1>
         </div>
         <nav className="flex flex-col p-4">
-          <Link to="/1st-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/1st-year"
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+          >
             1st Year
           </Link>
-          <Link to="/2nd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/2nd-year"
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+          >
             2nd Year
           </Link>
-          <Link to="/3rd-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/3rd-year"
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+          >
             3rd Year
           </Link>
-          <Link to="/4th-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
+          <Link
+            to="/4th-year"
+            className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md"
+          >
             4th Year
           </Link>
 
