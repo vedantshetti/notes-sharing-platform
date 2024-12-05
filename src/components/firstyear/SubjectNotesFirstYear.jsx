@@ -47,7 +47,7 @@ const SubjectNotesFirstYear = () => {
       <h2 className="text-1.7xl font-bold mb-6">
         Notes for {decodeURIComponent(subjectName)} (Year 1)
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {notes.length > 0 ? (
           notes.map((note) => (
             <div
@@ -56,12 +56,14 @@ const SubjectNotesFirstYear = () => {
               style={{
                 height: "150px", // Adjust height for notes box
                 boxShadow:
-                  "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)",
+                  "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
+                display: "flex", // Flexbox for centering text
+                flexDirection: "column", // Arrange content vertically
+                alignItems: "center", // Center content horizontally
+                justifyContent: "center", // Center content vertically
               }}
             >
-              <h3 className="text-lg font-semibold text-center mb-4">
-                {note.title}
-              </h3>
+              <h3 className="text-lg font-semibold text-center mb-4">{note.title}</h3>
               <a
                 href={note.file_url}
                 target="_blank"

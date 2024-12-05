@@ -38,25 +38,33 @@ const SubjectNotesFourthYear = () => {
   if (loading) return <p>Loading notes...</p>;
 
   return (
-    <div className="p-8">
+    <div
+      className="lg:ml-[250px] p-8"
+      style={{
+        minHeight: "100vh", // Full height of the screen
+        backgroundColor: "#f9f9f9", // Light background
+      }}
+    >
       <h2 className="text-1.7xl font-bold mb-6">
         Notes for {decodeURIComponent(subjectName)} (Year 4)
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {notes.length > 0 ? (
           notes.map((note) => (
             <div
               key={note.id}
               className="bg-white shadow-md p-4 rounded-lg border border-gray-200"
               style={{
-                height: "150px", // Adjust height for notes box
+                height: "150px", // Set a fixed height for uniformity
                 boxShadow:
-                  "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)",
+                  "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
+                display: "flex", // Flexbox for centering text
+                flexDirection: "column", // Arrange content vertically
+                alignItems: "center", // Center content horizontally
+                justifyContent: "center", // Center content vertically
               }}
             >
-              <h3 className="text-lg font-semibold text-center mb-4">
-                {note.title}
-              </h3>
+              <h3 className="text-lg font-semibold text-center mb-4">{note.title}</h3>
               <a
                 href={note.file_url}
                 target="_blank"
