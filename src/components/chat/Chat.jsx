@@ -156,7 +156,7 @@ const Chat = () => {
       >
         <div
           className={`max-w-xs lg:max-w-md p-4 rounded-lg ${
-            isCurrentUser ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
+            isCurrentUser ? "bg-blue-400 text-white" : "bg-gray-200 text-gray-800"
           }`}
         >
           {message.file_url && (
