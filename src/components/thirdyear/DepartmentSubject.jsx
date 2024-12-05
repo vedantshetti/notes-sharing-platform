@@ -4,7 +4,7 @@ import { supabase } from "../../supabaseClient";
 
 const DepartmentSubject = () => {
   const { departmentName } = useParams(); // Capture the department name from the URL
-  const [notes, setNotes] = useState([]);
+  const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const DepartmentSubject = () => {
 
         const departmentId = departmentData.id;
 
-        // Step 2: Fetch subjects based on departmentId and year
+        // Step 2: Fetch subjects based on departmentId and year (3rd year)
         const { data: subjectsData, error: subjectsError } = await supabase
           .from("subjects")
           .select("subject_name")
@@ -37,7 +37,7 @@ const DepartmentSubject = () => {
         if (subjectsError) {
           console.error("Error fetching subjects:", subjectsError);
         } else {
-          setNotes(subjectsData);
+          setSubjects(subjectsData);
         }
       } catch (error) {
         console.error("Unexpected error:", error);
@@ -52,21 +52,32 @@ const DepartmentSubject = () => {
   if (loading) return <p>Loading subjects...</p>;
 
   return (
-    <div className="p-8">
-      <h2 className="text-1.7xl font-bold mb-6">{departmentName} Subjects</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {notes.length > 0 ? (
-          notes.map((subject) => (
+    <div
+      className="lg:ml-[250px] p-8"
+      style={{
+        minHeight: "100vh", // Full height of the screen
+        backgroundColor: "#f9f9f9", // Light background for contrast
+      }}
+    >
+      <h2 className="text-1.7xl font-bold mb-6">
+        {departmentName} Subjects (3rd Year)
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+        {subjects.length > 0 ? (
+          subjects.map((subject) => (
             <Link
               key={subject.subject_name}
               to={`/3rd-year/${departmentName}/${encodeURIComponent(subject.subject_name)}`} // Encode subject name
               className="bg-white shadow-md p-4 rounded-lg border border-gray-200"
               style={{
-                height: '110px', // Fixed height for all boxes
-                boxShadow: '0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)', // Enhanced shadow
-                display: 'flex', // Flexbox for centering text
-                alignItems: 'center', // Center items vertically
-                justifyContent: 'center' // Center items horizontally
+                height: "150px", // Fixed height for all boxes
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
+                display: "flex", // Flexbox for centering text
+                alignItems: "center", // Center items vertically
+                justifyContent: "center", // Center items horizontally
+                textOverflow: "ellipsis", // Truncate long text
+                overflow: "hidden", // Ensure no overflow
+                whiteSpace: "normal", // Allow text wrapping
               }}
             >
               <h3 className="text-lg font-semibold text-center">{subject.subject_name}</h3>
