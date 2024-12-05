@@ -62,7 +62,7 @@ const App = () => {
         <div className="flex-1">
           <Routes>
             {/* Routes for 1st Year */}
-            <Route path="/1st-year" element={<FirstYear year={1} />} />  {/* List of all first-year subjects */}
+            <Route path="/1st-year"   element={<PrivateRoute element={<FirstYear year={1} />} />} />  {/* List of all first-year subjects */}
 <Route path="/1st-year/:subjectName" element={<PrivateRoute element={<SubjectNotesFirstYear />} />} />  {/* Subject notes for first-year subjects */}
 
 
