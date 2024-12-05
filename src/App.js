@@ -25,6 +25,7 @@ import AddNotesPage from './components/admin/AddNotesPage';
 import { fetchSession } from './components/auth/auth'; // Assuming this function checks session status
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
+import SubjectNotesFirstYear from './components/firstyear/SubjectNotesFirstYear';
 
 // PrivateRoute component to protect authenticated routes
 const PrivateRoute = ({ element }) => {
@@ -60,7 +61,9 @@ const App = () => {
         <div className="flex-1">
           <Routes>
             {/* Routes for 1st Year */}
-            <Route path="/1st-year" element={<FirstYear year={1} />} />
+            <Route path="/1st-year" element={<FirstYear year={1} />} />  {/* List of all first-year subjects */}
+<Route path="/1st-year/:subjectName" element={<PrivateRoute element={<SubjectNotesFirstYear />} />} />  {/* Subject notes for first-year subjects */}
+
 
             {/* Routes for 2nd Year */}
             <Route path="/2nd-year" element={<PrivateRoute element={<SecondYear />}/>} />

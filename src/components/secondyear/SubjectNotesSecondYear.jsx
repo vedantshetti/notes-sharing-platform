@@ -38,11 +38,17 @@ const SubjectNotesSecondYear = () => {
   if (loading) return <p>Loading notes...</p>;
 
   return (
-    <div className="p-8">
+    <div
+      className="lg:ml-[250px] p-8"
+      style={{
+        minHeight: "100vh", // Full height of the screen
+        backgroundColor: "#f9f9f9", // Light background
+      }}
+    >
       <h2 className="text-1.7xl font-bold mb-6">
         Notes for {decodeURIComponent(subjectName)} (Year 2)
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {notes.length > 0 ? (
           notes.map((note) => (
             <div
@@ -50,21 +56,26 @@ const SubjectNotesSecondYear = () => {
               className="bg-white shadow-md p-4 rounded-lg border border-gray-200"
               style={{
                 height: "150px", // Adjust height for notes box
-                boxShadow:
-                  "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)",
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
+                display: "flex", // Flexbox for centering text
+                alignItems: "center", // Center items vertically
+                justifyContent: "center", // Center items horizontally
+                textOverflow: "ellipsis", // Truncate long text
+                overflow: "hidden", // Ensure no overflow
+                whiteSpace: "normal", // Allow text wrapping
               }}
             >
-              <h3 className="text-lg font-semibold text-center mb-4">
-                {note.title}
-              </h3>
-              <a
-                href={note.file_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline block text-center"
-              >
-                View Note
-              </a>
+              <div className="text-center">
+                <h3 className="text-lg font-semibold mb-4">{note.title}</h3>
+                <a
+                  href={note.file_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  View Note
+                </a>
+              </div>
             </div>
           ))
         ) : (
