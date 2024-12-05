@@ -92,21 +92,28 @@ const Chat = () => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col justify-between h-full bg-gray-100 p-8 min-h-screen">
+    <div className="flex h-full min-h-screen bg-gray-100">
+    {/* Sidebar */}
+    <div className="hidden lg:block lg:w-1/6 bg-white shadow-lg">
+      {/* Sidebar content */}
+    </div>
+  
+    {/* Chat Area */}
+    <div className="flex flex-col justify-between flex-1 lg:w-3/4 p-8">
       <h2 className="text-3xl font-semibold text-center mb-6">Chat Room</h2>
-
+  
       {loading && (
         <div className="text-center py-4">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
         </div>
       )}
-
+  
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
           <span>{error}</span>
         </div>
       )}
-
+  
       <div className="flex-1 overflow-auto p-4 bg-white rounded-lg shadow-lg max-h-[500px]">
         {messages.map((message) => {
           const isCurrentUser = message.user_id === currentUser?.id;
@@ -116,13 +123,20 @@ const Chat = () => {
               className={`flex items-start mb-4 ${isCurrentUser ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`max-w-xs lg:max-w-md p-4 rounded-lg ${isCurrentUser ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"}`}
+                className={`max-w-xs lg:max-w-md p-4 rounded-lg ${
+                  isCurrentUser ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800"
+                }`}
               >
                 <p className="break-words">{message.text}</p>
                 <small
-                  className={`block mt-2 text-xs ${isCurrentUser ? "text-blue-100" : "text-gray-500"}`}
+                  className={`block mt-2 text-xs ${
+                    isCurrentUser ? "text-blue-100" : "text-gray-500"
+                  }`}
                 >
-                  {new Date(message.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  {new Date(message.created_at).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                 </small>
               </div>
             </div>
@@ -130,7 +144,7 @@ const Chat = () => {
         })}
         <div ref={messagesEndRef} />
       </div>
-
+  
       <form onSubmit={handleSubmit} className="mt-4 flex gap-2">
         <input
           type="text"
@@ -149,6 +163,8 @@ const Chat = () => {
         </button>
       </form>
     </div>
+  </div>
+  
   );
 };
 
