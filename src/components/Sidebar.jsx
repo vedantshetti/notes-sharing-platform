@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { fetchSession, onAuthStateChange, handleLogout } from "./auth/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket, faRightFromBracket, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { faRocketchat } from "@fortawesome/free-brands-svg-icons"; // Correct import
 import Navbar from "../shared/Navbar";
 
 const Sidebar = () => {
@@ -80,6 +81,18 @@ const Sidebar = () => {
             4th Year
           </Link>
 
+          {/* Community Section */}
+          <div className="mt-6">
+            <h2 className="text-lg font-semibold text-gray-800">Community</h2>
+            <Link
+              to="/chat"
+              className="w-full text-gray-700 flex items-center mb-2 p-2 rounded-md hover:bg-blue-200"
+            >
+              <FontAwesomeIcon icon={faRocketchat} className="w-5 h-5 mr-2" />
+              Chat
+            </Link>
+          </div>
+
           {/* Auth Section */}
           <div className="mt-4">
             <h2 className="text-lg font-semibold text-gray-800">Account</h2>
@@ -132,6 +145,18 @@ const Sidebar = () => {
           <Link to="/4th-year" className="mb-4 text-gray-700 hover:bg-blue-200 p-2 rounded-md">
             4th Year
           </Link>
+
+          {/* Community Section */}
+          <div className="mt-6">
+            <h2 className="text-lg font-semibold text-gray-800">Community</h2>
+            <Link
+              to="/chat"
+              className="w-full text-gray-700 flex items-center mb-2 p-2 rounded-md hover:bg-blue-200"
+            >
+              <FontAwesomeIcon icon={faRocketchat} className="w-5 h-5 mr-2" />
+              Chat
+            </Link>
+          </div>
 
           {/* Auth Section */}
           <div className="mt-4">
