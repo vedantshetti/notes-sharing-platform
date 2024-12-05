@@ -160,26 +160,33 @@ const Chat = () => {
           }`}
         >
           {message.file_url && (
-            <div className="mb-2">
-              {/* Check if file is an image */}
-              {message.file_url.match(/\.(jpeg|jpg|png|gif)$/i) ? (
-                <img
-                  src={message.file_url}
-                  alt="Shared content"
-                  className="w-full h-auto rounded-lg mb-2 shadow-md"
-                />
-              ) : (
-                <a
-                  href={message.file_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline text-sm"
-                >
-                  Download File
-                </a>
-              )}
-            </div>
-          )}
+  <div className="mb-2">
+    {/* Check if file is an image */}
+    {message.file_url.match(/\.(jpeg|jpg|png|gif)$/i) ? (
+      <a
+        href={message.file_url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src={message.file_url}
+          alt="Shared content"
+          className="w-auto max-w-[200px] max-h-[200px] rounded-lg mb-2 shadow-md cursor-pointer"
+        />
+      </a>
+    ) : (
+      <a
+        href={message.file_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-500 underline text-sm"
+      >
+        Download File
+      </a>
+    )}
+  </div>
+)}
+
           <p className="break-words">{message.text}</p>
           <small
             className={`block mt-2 text-xs ${
