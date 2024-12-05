@@ -27,6 +27,7 @@ import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
 import SubjectNotesFirstYear from './components/firstyear/SubjectNotesFirstYear';
 import Chat from './components/chat/Chat';
+import HomePage from './components/HomePage';
 
 // PrivateRoute component to protect authenticated routes
 const PrivateRoute = ({ element }) => {
@@ -61,6 +62,10 @@ const App = () => {
         <Sidebar />
         <div className="flex-1">
           <Routes>
+
+
+          <Route path="/" element={<HomePage />} /> {/* Home page */}
+          <Route path="/dashboard" element={<HomePage />} /> {/* Home page */}
             {/* Routes for 1st Year */}
             <Route path="/1st-year"   element={<PrivateRoute element={<FirstYear year={1} />} />} />  {/* List of all first-year subjects */}
 <Route path="/1st-year/:subjectName" element={<PrivateRoute element={<SubjectNotesFirstYear />} />} />  {/* Subject notes for first-year subjects */}
