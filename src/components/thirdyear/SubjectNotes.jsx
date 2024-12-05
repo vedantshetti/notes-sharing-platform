@@ -71,7 +71,7 @@ const SubjectNotes = () => {
           notes.map((note) => (
             <div
               key={note.id}
-              className="bg-white shadow-md p-4 rounded-lg border border-gray-200"
+              className="bg-white shadow-md p-4 rounded-lg border border-gray-200 cursor-pointer"
               style={{
                 height: "150px", // Fixed height for all boxes
                 boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
@@ -82,18 +82,11 @@ const SubjectNotes = () => {
                 overflow: "hidden", // Ensure no overflow
                 whiteSpace: "normal", // Allow text wrapping
               }}
+              onClick={() => window.open(note.file_url, "_blank")}
             >
               <h3 className="text-lg font-semibold text-center mb-4">
                 {note.title}
               </h3>
-              <a
-                href={note.file_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline block text-center"
-              >
-                View Note
-              </a>
             </div>
           ))
         ) : (
