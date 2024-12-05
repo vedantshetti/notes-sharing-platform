@@ -151,55 +151,66 @@ const Chat = () => {
     const isCurrentUser = message.user_id === currentUser?.id;
     return (
       <div
-        key={message.id}
-        className={`flex items-start mb-4 ${isCurrentUser ? "justify-end" : "justify-start"}`}
-      >
-        <div
-          className={`max-w-xs lg:max-w-md p-4 rounded-lg ${
-            isCurrentUser ? "bg-blue-400 text-white" : "bg-gray-200 text-gray-800"
-          }`}
-        >
-          {message.file_url && (
-  <div className="mb-2">
-    {/* Check if file is an image */}
-    {message.file_url.match(/\.(jpeg|jpg|png|gif)$/i) ? (
-      <a
-        href={message.file_url}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src={message.file_url}
-          alt="Shared content"
-          className="w-auto max-w-[200px] max-h-[200px] rounded-lg mb-2 shadow-md cursor-pointer"
-        />
-      </a>
-    ) : (
-      <a
-        href={message.file_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-500 underline text-sm"
-      >
-        Download File
-      </a>
-    )}
-  </div>
-)}
-
-          <p className="break-words">{message.text}</p>
-          <small
-            className={`block mt-2 text-xs ${
-              isCurrentUser ? "text-blue-100" : "text-gray-500"
-            }`}
+  key={message.id}
+  className={`flex items-start mb-4 ${isCurrentUser ? "justify-end" : "justify-start"}`}
+>
+  <div
+    className={`relative max-w-xs lg:max-w-md px-4 py-3 rounded-lg shadow-md ${
+      isCurrentUser
+        ? "bg-blue-500 text-white rounded-br-none"
+        : "bg-gray-200 text-gray-800 rounded-bl-none"
+    }`}
+  >
+    {message.file_url && (
+      <div className="mb-2">
+        {/* Check if file is an image */}
+        {message.file_url.match(/\.(jpeg|jpg|png|gif)$/i) ? (
+          <a
+            href={message.file_url}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {new Date(message.created_at).toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </small>
-        </div>
+            <img
+              src={message.file_url}
+              alt="Shared content"
+              className="w-auto max-w-[200px] max-h-[200px] rounded-lg mb-2 shadow-md cursor-pointer"
+            />
+          </a>
+        ) : (
+          <a
+            href={message.file_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline text-sm"
+          >
+            Download File
+          </a>
+        )}
       </div>
+    )}
+    <p className="break-words">{message.text}</p>
+    <small
+      className={`block mt-2 text-xs ${
+        isCurrentUser ? "text-blue-100" : "text-gray-500"
+      }`}
+    >
+      {new Date(message.created_at).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}
+    </small>
+
+    {/* Tail for chat bubble */}
+    {/* <span
+      className={`absolute ${
+        isCurrentUser ? "right-0 top-1/2 transform translate-x-full -translate-y-1/2" : "left-0 top-1/2 transform -translate-x-full -translate-y-1/2"
+      } w-3 h-3 ${
+        isCurrentUser ? "bg-blue-500" : "bg-gray-200"
+      } rounded-full`}
+    /> */}
+  </div>
+</div>
+
     );
   })}
   <div ref={messagesEndRef} />
