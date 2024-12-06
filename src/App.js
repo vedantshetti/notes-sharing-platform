@@ -29,6 +29,7 @@ import SubjectNotesFirstYear from './components/firstyear/SubjectNotesFirstYear'
 import Chat from './components/chat/Chat';
 import HomePage from './components/HomePage';
 
+
 // PrivateRoute component to protect authenticated routes
 const PrivateRoute = ({ element }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null); // To hold the authentication status
@@ -64,6 +65,9 @@ const App = () => {
           <Routes>
 
 
+
+
+
           <Route path="/" element={<HomePage />} /> {/* Home page */}
           <Route path="/dashboard" element={<HomePage />} /> {/* Home page */}
             {/* Routes for 1st Year */}
@@ -96,6 +100,7 @@ const App = () => {
             <Route path="/admin/:year/:departmentName" element={<PrivateRoute element={<DepartmentSubjects />} />} />
             <Route path="/admin/:year/:departmentName/:subjectName" element={<PrivateRoute element={<AddNotesPage />}/>} />
 
+    
             {/* Auth Routes */}
             <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/auth/register" element={<RegisterPage />} />

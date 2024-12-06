@@ -3,21 +3,21 @@ import { useParams } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
 const SubjectNotesFirstYear = () => {
-  const { subjectName } = useParams(); // Capture the subject from the URL
+  const { subjectName } = useParams(); // Capture subject name from URL
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchNotes = async () => {
       setLoading(true);
-
+    
       try {
-        // Fetch notes for the 1st year based on the subject
         const { data: notesData, error: notesError } = await supabase
           .from("notes")
           .select("id, title, file_url")
-          .eq("subject_name", decodeURIComponent(subjectName)) // Ensure dynamic subject name is used
-          .eq("year_name", "Year 1"); // Ensure it's Year 1
+          .eq("subject_name", decodeURIComponent(subjectName))
+          .eq("year_name", "Year 1")
+          .eq("department_name", "General"); // Placeholder for first year
 
         if (notesError) {
           console.error("Error fetching notes:", notesError);
@@ -27,10 +27,10 @@ const SubjectNotesFirstYear = () => {
       } catch (error) {
         console.error("Unexpected error:", error);
       }
-
+    
       setLoading(false);
     };
-
+    
     fetchNotes();
   }, [subjectName]);
 
@@ -38,10 +38,10 @@ const SubjectNotesFirstYear = () => {
 
   return (
     <div
-      className="lg:ml-[250px] p-8" // Ensures content starts after the sidebar on large screens
+      className="lg:ml-[250px] p-8"
       style={{
-        minHeight: "100vh", // Ensures the layout stretches to full height
-        backgroundColor: "#f9f9f9", // Light background for better contrast
+        minHeight: "100vh", // Full height of the screen
+        backgroundColor: "#f9f9f9", // Light background
       }}
     >
       <h2 className="text-1.7xl font-bold mb-6">
@@ -54,24 +54,18 @@ const SubjectNotesFirstYear = () => {
               key={note.id}
               className="bg-white shadow-md p-4 rounded-lg border border-gray-200"
               style={{
-                height: "150px", // Adjust height for notes box
+                height: "150px", // Fixed height for uniformity
                 boxShadow:
                   "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
                 display: "flex", // Flexbox for centering text
                 flexDirection: "column", // Arrange content vertically
                 alignItems: "center", // Center content horizontally
                 justifyContent: "center", // Center content vertically
+                cursor: "pointer", // Indicate it's clickable
               }}
+              onClick={() => window.open(note.file_url, "_blank")} // Open file URL when clicked
             >
-              <h3 className="text-lg font-semibold text-center mb-4">{note.title}</h3>
-              <a
-                href={note.file_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline block text-center"
-              >
-                View Note
-              </a>
+              <h3 className="text-lg font-semibold text-center">{note.title}</h3>
             </div>
           ))
         ) : (
