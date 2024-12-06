@@ -26,7 +26,7 @@ const AddNotesPage = () => {
 
     try {
       // Define the storage path for the file
-      const bucketName = 'notes';  // The name of your Supabase storage bucket
+      const bucketName = "notes"; // The name of your Supabase storage bucket
       const filePath = `${departmentName}/${subjectName}/${file.name}`; // Use department and subject to create the path
 
       // Upload the file to Supabase storage
@@ -41,13 +41,20 @@ const AddNotesPage = () => {
         return;
       }
 
+      // Generate the public URL for the uploaded file
+      const { data: publicUrlData } = supabase.storage
+        .from(bucketName)
+        .getPublicUrl(filePath);
+
+      const publicUrl = publicUrlData.publicUrl;
+
       // Save the note details to the database
       const { data: noteData, error: noteError } = await supabase
         .from("notes")
         .insert([
           {
             title,
-            file_url: data?.path, // Path to the uploaded file
+            file_url: publicUrl, // Save the public URL
             subject_name: subjectName,
             department_name: departmentName,
             year_name: `Year ${year}`,
@@ -61,9 +68,8 @@ const AddNotesPage = () => {
         alert("Note added successfully!");
         navigate(`/admin/${year}/${departmentName}/${subjectName}`); // Redirect back to the subject page
       }
-      
-      setLoading(false);
 
+      setLoading(false);
     } catch (error) {
       console.error("Unexpected error:", error);
       alert("Error uploading file");
