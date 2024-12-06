@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 
 const SubjectNotes = () => {
-  const { subjectName } = useParams(); // Capture the subject name from the URL
+  const { subjectName, departmentName } = useParams(); // Capture department and subject from URL
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,31 +12,12 @@ const SubjectNotes = () => {
       setLoading(true);
 
       try {
-        // Step 1: Fetch the subject data based on subject name, year, and department
-        const { data: subjectData, error: subjectError } = await supabase
-          .from("subjects")
-          .select("id, subject_name, year_id, department_id")
-          .eq("subject_name", decodeURIComponent(subjectName))
-          .single();
-
-        if (subjectError || !subjectData) {
-          console.error(
-            "Error fetching subject:",
-            subjectError || "No subject found"
-          );
-          setLoading(false);
-          return;
-        }
-
-        const { id: subjectId, year_id, department_id } = subjectData;
-
-        // Step 2: Fetch notes for the subject, year, and department
+        // Fetch notes based on subject name, year, and department
         const { data: notesData, error: notesError } = await supabase
           .from("notes")
           .select("id, title, file_url")
           .eq("subject_name", decodeURIComponent(subjectName))
-          .eq("year_name", "Year 3") // Replace with the actual year if dynamic
-          .eq("department_name", "Artificial Intelligence and Data Science"); // Replace with dynamic department if necessary
+          .eq("department_name", decodeURIComponent(departmentName)); // Use dynamic department
 
         if (notesError) {
           console.error("Error fetching notes:", notesError);
@@ -51,42 +32,44 @@ const SubjectNotes = () => {
     };
 
     fetchNotes();
-  }, [subjectName]);
+  }, [subjectName, departmentName]);
 
   if (loading) return <p>Loading notes...</p>;
+
+  const handleClick = (fileUrl) => {
+    window.open(fileUrl, "_blank");
+  };
 
   return (
     <div
       className="lg:ml-[250px] p-8"
       style={{
         minHeight: "100vh", // Full height of the screen
-        backgroundColor: "#f9f9f9", // Light background for contrast
+        backgroundColor: "#f9f9f9", // Light background
       }}
     >
       <h2 className="text-1.7xl font-bold mb-6">
         Notes for {decodeURIComponent(subjectName)}
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {notes.length > 0 ? (
           notes.map((note) => (
             <div
               key={note.id}
-              className="bg-white shadow-md p-4 rounded-lg border border-gray-200 cursor-pointer"
+              className="bg-white shadow-md p-4 rounded-lg border border-gray-200"
               style={{
-                height: "150px", // Fixed height for all boxes
-                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
+                height: "150px", // Set a fixed height for uniformity
+                boxShadow:
+                  "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
                 display: "flex", // Flexbox for centering text
-                alignItems: "center", // Center items vertically
-                justifyContent: "center", // Center items horizontally
-                textOverflow: "ellipsis", // Truncate long text
-                overflow: "hidden", // Ensure no overflow
-                whiteSpace: "normal", // Allow text wrapping
+                flexDirection: "column", // Arrange content vertically
+                alignItems: "center", // Center content horizontally
+                justifyContent: "center", // Center content vertically
+                cursor: "pointer", // Make it clear it's clickable
               }}
-              onClick={() => window.open(note.file_url, "_blank")}
+              onClick={() => handleClick(note.file_url)} // Open the file URL when clicked
             >
-              <h3 className="text-lg font-semibold text-center mb-4">
-                {note.title}
-              </h3>
+              <h3 className="text-lg font-semibold text-center mb-4">{note.title}</h3>
             </div>
           ))
         ) : (
