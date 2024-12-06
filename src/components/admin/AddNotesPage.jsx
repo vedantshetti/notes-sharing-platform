@@ -78,11 +78,30 @@ const AddNotesPage = () => {
   };
 
   return (
-    <div className="p-8">
-      <h2 className="text-1.7xl font-bold mb-6">Add Notes for {subjectName}</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="title" className="block text-sm font-medium">
+    <div
+      className="lg:ml-[250px] p-8"
+      style={{
+        minHeight: "100vh", // Full-height layout
+        backgroundColor: "#f9f9f9", // Light background
+      }}
+    >
+      <h2 className="text-1.7xl font-bold mb-6">
+        Add Notes for {subjectName} (Year {year})
+      </h2>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded-lg shadow-md border border-gray-200"
+        style={{
+          maxWidth: "600px",
+          margin: "0 auto", // Center the form
+          boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Elevated form box
+        }}
+      >
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium mb-2"
+          >
             Note Title
           </label>
           <input
@@ -90,20 +109,24 @@ const AddNotesPage = () => {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="input"
+            className="w-full p-3 border rounded-lg"
+            placeholder="Enter note title"
             required
           />
         </div>
 
-        <div>
-          <label htmlFor="file" className="block text-sm font-medium">
+        <div className="mb-4">
+          <label
+            htmlFor="file"
+            className="block text-sm font-medium mb-2"
+          >
             Upload File
           </label>
           <input
             id="file"
             type="file"
             onChange={handleFileChange}
-            className="input"
+            className="w-full p-3 border rounded-lg"
             required
           />
         </div>
@@ -111,7 +134,9 @@ const AddNotesPage = () => {
         <button
           type="submit"
           disabled={loading}
-          className="btn bg-blue-600 text-white"
+          className={`w-full py-3 rounded-lg text-white font-semibold ${
+            loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+          }`}
         >
           {loading ? "Uploading..." : "Upload Notes"}
         </button>
