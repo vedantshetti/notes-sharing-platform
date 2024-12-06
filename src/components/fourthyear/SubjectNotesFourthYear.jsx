@@ -37,6 +37,10 @@ const SubjectNotesFourthYear = () => {
 
   if (loading) return <p>Loading notes...</p>;
 
+  const handleClick = (fileUrl) => {
+    window.open(fileUrl, "_blank");
+  };
+
   return (
     <div
       className="lg:ml-[250px] p-8"
@@ -62,17 +66,11 @@ const SubjectNotesFourthYear = () => {
                 flexDirection: "column", // Arrange content vertically
                 alignItems: "center", // Center content horizontally
                 justifyContent: "center", // Center content vertically
+                cursor: "pointer", // Make it clear it's clickable
               }}
+              onClick={() => handleClick(note.file_url)} // Open the file URL when clicked
             >
               <h3 className="text-lg font-semibold text-center mb-4">{note.title}</h3>
-              <a
-                href={note.file_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline block text-center"
-              >
-                View Note
-              </a>
             </div>
           ))
         ) : (
