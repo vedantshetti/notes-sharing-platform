@@ -51,32 +51,30 @@ const SubjectNotesSecondYear = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {notes.length > 0 ? (
           notes.map((note) => (
-            <div
+            <a
               key={note.id}
+              href={note.file_url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-white shadow-md p-4 rounded-lg border border-gray-200"
               style={{
                 height: "150px", // Adjust height for notes box
-                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
+                boxShadow:
+                  "0 10px 20px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.1)", // Enhanced shadow
                 display: "flex", // Flexbox for centering text
                 alignItems: "center", // Center items vertically
                 justifyContent: "center", // Center items horizontally
                 textOverflow: "ellipsis", // Truncate long text
                 overflow: "hidden", // Ensure no overflow
                 whiteSpace: "normal", // Allow text wrapping
+                textDecoration: "none", // Remove underline
+                color: "inherit", // Maintain text color
               }}
             >
               <div className="text-center">
                 <h3 className="text-lg font-semibold mb-4">{note.title}</h3>
-                <a
-                  href={note.file_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  View Note
-                </a>
               </div>
-            </div>
+            </a>
           ))
         ) : (
           <p>No notes available for this subject.</p>
