@@ -96,9 +96,9 @@ const App = () => {
             {/* Admin Routes */}
             <Route path="/upload" element={<UploadNotes />} />
 
-            <Route path="/admin" element={<PrivateRoute element={<AdminPage />}/>} />
+            {/* <Route path="/admin" element={<PrivateRoute element={<AdminPage />}/>} />
             <Route path="/admin/:year/:departmentName" element={<PrivateRoute element={<DepartmentSubjects />} />} />
-            <Route path="/admin/:year/:departmentName/:subjectName" element={<PrivateRoute element={<AddNotesPage />}/>} />
+            <Route path="/admin/:year/:departmentName/:subjectName" element={<PrivateRoute element={<AddNotesPage />}/>} /> */}
 
     
             {/* Auth Routes */}
