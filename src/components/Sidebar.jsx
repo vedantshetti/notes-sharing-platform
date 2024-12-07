@@ -194,7 +194,7 @@ const Sidebar = () => {
             <h2 className="text-lg font-semibold text-gray-800">Account</h2>
             {user ? (
               <Link
-                to="/home"
+                to="/dashboard"
                 onClick={handleLogout}
                 className="w-full text-gray-700 flex items-center mb-2 p-2 rounded-md hover:bg-blue-200"
               >
